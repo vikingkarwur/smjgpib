@@ -1,0 +1,728 @@
+body
+{
+	margin: 0;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+	background-color:#C6D6E3;
+}
+
+#header-main
+{
+	position:static;
+	width: 100%;
+	height: 45px;
+	right:0;
+	bottom:0;
+	left:0;
+	background: #6CB0D3;
+	color:#FFFFFF;
+	border-top: solid 5px #f5f5f5;
+}
+
+#header
+{
+height:100px;
+background-color:#FFFFFF;
+background-image:url(../Images/smj-logo.gif);
+background-repeat:no-repeat;
+background-position:center;
+}
+
+#breadcrumbs
+{
+height:30px;
+padding-left:20px;
+background-color:#6CB0D3;
+border-bottom:5px solid white;
+}
+
+
+#search-box
+{
+height:30px;
+padding-left:20px;
+background-color:#6CB0D3;
+border-bottom:5px solid white;
+}
+
+#info-box
+{
+float:right;
+width:500px;
+height:30px;
+background-color:#6CB0D3;
+border-bottom:5px solid white;
+border-left:1px dotted white;
+}
+
+#info-box p
+{
+color:#FFFFFF;
+padding:5px;
+}
+
+#contents
+{
+margin:85px 0 20px 0;
+text-align:left;
+font-size: 11px;
+}
+
+#contents h1
+{
+	background-color:#006699;
+	text-align:left;
+	font-family: arial, san-serif;
+	font-size: 20px;
+	font-weight:bold;
+	color:#f5f5f5;
+	margin:0px;
+	padding:5px;
+}
+
+#c-box
+{
+padding:10px;
+margin:0px;
+text-align:left;
+font-size: 11px;
+}
+
+#c-box form
+{
+font-size: 11px;
+}
+
+#c-box p
+{
+font-size: 11px;
+}
+
+#login-error
+{
+color:#CC0000;
+text-align:center;
+padding:5px;
+}
+
+#login-box
+{
+background-color:#E5E5E5;
+text-align:left;
+}
+
+#wrapper
+{
+background-color:#F2EEDB;
+height:auto;
+border:1px solid white;
+}
+
+#content-logo
+{
+background-color:#FFFFFF;
+background-image:url(../Images/smj-logo.gif);
+background-repeat:no-repeat;
+height:100px;
+margin-right:201px;
+margin-top:0px;
+text-align:center;
+}
+
+#column1
+{
+background-color:#F2EEDB;
+text-align:left;
+font-size: 11px;
+margin-right:201px;
+height:inherit;
+margin-top:0px;
+margin-bottom:10px;
+}
+
+#column1 h3
+{
+background-color:#6CB0D3;
+padding:5px;
+color:white;
+margin-top:0px;
+font-weight:normal;
+font-size:11px;
+}
+
+#column1 h4
+{
+background-color:#6CB0D3;
+padding:5px;
+color:white;
+margin-top:0px;
+font-weight:normal;
+font-size:10px;
+}
+
+#column1 p
+{
+color:#646465;
+margin:0;
+padding:0px 10px 5px 10px;
+}
+
+#column2
+{
+float:right;
+width:200px;
+background-color:#2F648F;
+border-left:5px solid #f1f1f1;
+}
+
+#column2 p
+{
+color:#FFFFFF;
+padding:10px;
+margin-top:2px;
+margin-bottom:2px;
+}
+
+#column2 h3
+{
+background-color:#6CB0D3;
+font-variant:uppercase;
+margin:0;
+padding:5px;
+font-weight:bold;
+font-size:14px;
+color:#FFFFFF;
+font-family: "Tahoma", Arial;
+}
+
+#bottom-foot
+{
+clear:both;
+}
+
+#footer
+{
+background-color:#C6D6E3;
+padding:10px;
+text-align:center;
+color:#FFFFFF;
+}
+
+TD, TH
+{
+    font-size: 11px;
+}
+
+TEXTAREA, INPUT
+{
+	font-family: verdana, tahoma;
+	font-size: 11px;
+}
+
+.LeftNavColumn
+{
+	background: #C6D6E3;
+	border-right: solid 1px black;
+}
+
+.Footer
+{
+	position: fixed;
+	width: 100%;
+	height: 16px;
+	padding:5px;
+	right:0;
+	bottom:0;
+	left:0;
+	background: #6CB0D3;
+	color:#FFFFFF;
+	text-align: center;
+	border-top: solid 1px white;
+}
+
+.Search
+{
+	border-bottom: solid 1px white;
+	background: #6CB0D3;
+	padding:2px;
+	color:#FFFFFF;
+}
+
+TD.HeaderRow
+{
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 1px;
+}
+
+.icButton
+{
+	background: #00035B;
+	border: solid 1px #f5f5f5;
+	cursor: pointer;
+	color:#FFFFFF;
+	padding:3px;
+	font-size: 11px;
+	margin:2px;
+}
+
+.icTinyButton
+{
+	background: #00035B;
+	border: solid 1px #f5f5f5;
+	font-size: 10px;
+	color:#FFFFFF;
+	padding: 3px;
+	cursor: pointer;
+}
+
+A:active
+{
+	color: #000000;
+	text-decoration: none;
+: none;
+}
+
+A:visited
+{
+	color: #000000;
+	text-decoration: none;
+: none;
+}
+
+A:link
+{
+	color: #000000;
+	text-decoration: none;
+: none;
+}
+
+A:hover
+{
+	color: #FF0000;
+	background-color: #FFFF00;
+}
+
+A.SmallText
+{
+	font-size: 10px;
+}
+
+/*
+.PageTitle
+{
+	font-size: 18px;
+	color: #646465;
+	text-align: left;
+	font-weight:bold;
+	padding:5px;
+}
+*/
+
+.LargeText
+{
+	font-size: 16px;
+}
+
+.MediumLargeText
+{
+	font-size: 14px;
+}
+
+.MediumText
+{
+	font-size: 11px;
+}
+
+.SmallText
+{
+	font-size: 10px;
+}
+
+.SmallError
+{
+	font-size: 10px;
+	color: red;
+}
+
+.LargeError
+{
+	font-size: 14px;
+	color: red;
+}
+
+.ShadedBox
+{
+	background: #C6D6E3;
+	border: solid 1px black;
+	padding: 8px;
+}
+
+.LightShadedBox
+{
+	background: #fcfbf7;
+	border: solid 1px #C6D6E3;
+	padding: 4px;
+}
+
+.SmallShadedBox
+{
+	background: #C6D6E3;
+	border: solid 1px black;
+	padding: 4px;
+}
+
+.TinyShadedBox
+{
+	background: #f7f5ea;
+	border: solid 1px white;
+	padding: 2px;
+}
+
+TR.RowColorA TD
+{
+	background: #fcfbf7;
+	border-bottom: solid 1px #eaeaea;
+}
+
+TR.RowColorB TD
+{
+	background: white;
+	border-bottom: solid 1px #eaeaea;
+}
+
+TR.RowColorC TD
+{
+	background: white;
+	border-bottom: solid 1px #eaeaea;
+}
+
+DIV.MenuItem
+{
+	color: navy;
+	font-weight: bold;
+	padding: 10px;
+}
+
+DIV.ActiveMenuItem
+{
+	background: navy;
+	font-weight: bold;
+	color: tan;
+	padding: 10pt;
+}
+
+DIV.p
+{
+    font-size: 11px;
+    margin: 0;
+    padding: 0px;
+}
+
+DIV.BJ_menuBar, DIV.BJ_menuElement,
+DIV.BJ_subMenuBar, DIV.BJ_subMenuElement
+{
+    font-size: 11px;
+    color: #2F648F;
+    text-align: left;
+}
+
+DIV.BJ_subMenuBar
+{
+	background-color: #C6D6E3;
+	border-top: 2px solid #FCFBF7;
+	border-right: 2px solid #868379;
+	border-bottom: 2px solid #868379;
+	border-left: 2px solid #FCFBF7;
+}
+
+DIV.BJ_menuBar
+{
+    padding: 1px 4px;
+	background-color: #C6D6E3;
+	border-top: 0px none;
+	border-right: 0px none;
+	border-bottom: 1px solid #000000;
+	border-left: 0px none;
+}
+
+DIV.BJ_menuElement
+{
+    border: 1px solid #C6D6E3;
+    padding: 2px 6px 2px 6px;
+    /*font-weight: bold;*/
+}
+
+DIV.BJ_subMenuElement
+{
+    padding: 2px 6px 2px 6px;
+    margin: 0 1px 1px 0;
+}
+
+DIV.BJ_subMenuElementHover
+{
+    background-color: #FCFBF7;
+    color: #2F648F;
+}
+
+DIV.BJ_menuElementHover
+{
+    border-color: #FCFBF7 #868379 #868379 #FCFBF7;
+}
+
+DIV.BJ_menuElementActive
+{
+    background-color: #FCFBF7;
+    color: #2F648F;
+    border-color: #868379 #FCFBF7 #FCFBF7 #868379;
+}
+
+DIV.hr
+{
+    border-top: 1px solid #906040;
+    border-bottom: 1px solid #e0b090;
+}
+
+.Help_Header
+{
+	color: navy;
+	font-weight: bold;
+}
+
+P
+{
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+OL LI
+{
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.Help_Section
+{
+	text-align: justify;
+}
+
+
+SELECT
+{
+	font-size: 11px;
+}
+
+HR
+{
+	height: 1px;
+	color: black;
+	width: 100%;
+}
+
+TR.TableHeader TD
+{
+	background: #C6D6E3;
+	font-weight: bold;
+	border-bottom: solid 1px black;
+	border-top: solid 1px black;
+}
+
+TR.TinyTableHeader TD
+{
+	background: #f7f5ea;
+	font-size: 10px;
+	font-weight: bold;
+	border-bottom: solid 1px black;
+}
+
+TD.LabelColumn
+{
+	text-align: right;
+	font-weight: bold;
+	/*background: #F2EEDB;
+	border: solid 1px black;
+	 padding: 8px; */
+	vertical-align: top;
+}
+
+TD.TinyLabelColumn
+{
+	text-align: right;
+	font-weight: bold;
+	background: #f7f5ea;
+	border: solid 1px white;
+	padding: 2px;
+	vertical-align: top;
+}
+
+TD.TextColumn
+{
+	border-top: solid 1px #eaeaea;
+	/*padding: 8px;*/
+	vertical-align: top;
+}
+
+TD.TinyTextColumn
+{
+	border-top: solid 1px white;
+	background: #F7F5EA;
+	padding: 2px;
+	vertical-align: top;
+}
+
+TD.TextColumnWithBottomBorder
+{
+	border-top: solid 1px #eaeaea;
+	border-bottom: solid 1px #eaeaea;
+	padding: 8px;
+}
+
+TD.ControlBreak
+{
+	font-size: 12px;
+	color: black;
+	text-align: left;
+}
+
+
+
+/* */
+/* @import url(menu_icons.css ); */
+
+/*		------	Basic style	------		*/
+#menu {
+	/*
+	height: ??;
+	Since we are floating all LIs, then you need to set height in the make-up part, if you want to place some background on the menu
+	*/
+	display: block;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style-type: none;
+}
+
+#menu li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	display: block;
+	float: left;
+	position: relative;
+}
+
+#menu a {
+	display: block;
+}
+
+* html #menu li a {
+	position: relative;/* Fix IE6's inability to expand clickable area */
+}
+
+#menu li ul {
+	visibility: hidden;
+	position: absolute;
+	z-index: 10;
+}
+
+/* using display is better (no scrollbars when page loads), but IE can't handle it, so only good browsers should see this */
+html>body #menu li ul {
+	display: none;
+}
+
+#menu li li {
+	width: 100%;
+}
+
+/* fix the position */
+#menu li li ul {
+	top: 0;
+	left: 100%;
+}
+
+/* simulate child selector for IE */
+div#menu li:hover ul,
+#menu li:hover li:hover ul,
+#menu li:hover li:hover li:hover ul {
+	visibility: visible;
+}
+div#menu li:hover li ul,
+#menu li:hover li:hover li ul,
+#menu li:hover li:hover li:hover li ul {
+	visibility: hidden;
+}
+
+/* do the normal show, with increased specificity, for good browsers */
+#menu ul#menuList li:hover>ul {
+	display: block;
+	visibility: visible;
+}
+
+
+/*		------   Make-up	--------			*/
+
+#menu {
+	font-size: 11px;
+	color: #000;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	height: 28px;/* 	Height mentioned above	 */
+}
+
+#menu a {
+	text-decoration: none;
+	text-align: center;
+	color: #000;
+	padding: 5px;
+}
+
+#menu li {
+	margin: 2px;
+	padding: 1px;
+}
+#menu li:hover {
+	background-color:#CCCCCC;
+	padding: 0;
+	border: 1px solid #f1f1f1;
+}
+
+
+#menu li li {
+	width: 158px;/* 	we can't use 100% because LIs have margin and padding (although latter is more important) */
+}
+
+#menu li ul {
+	color: #000;
+	background-color:#fff;
+	border: 1px solid #ccc;
+	width: 164px;
+}
+
+#menu li ul a {
+	text-align: left;
+}
+
+#menu li ul a.submenu {
+	background-image: url(images/arrow.gif);
+	background-repeat: no-repeat;
+	background-position: 100% 5px;
+}
+
+/*		------   Specific fixes	(thank to W3C for these) --------			*/
+/* 
+		I'm gonna move the submenus 5px up
+		5px works fine here and it is roughly calculated as:
+			padding-bottom + margin-bottom + border-bottom of the LI
+			+
+			*-top values of the LI
+			
+		Mostly it needs a bit of trial and error.
+		Basic idea is to remove the scrollbar when menu re-positioning is perfomed. Of course, script could take care of that, but that takes too much code - this is easier.
+*/
+#menu li li ul {
+	margin-top: -5px;
+}

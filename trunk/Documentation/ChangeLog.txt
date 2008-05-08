@@ -1,0 +1,273 @@
+2004-01-19  VERSION 1.2.6
+
+		NEW FEATURES
+		Added German localization
+
+		CHANGES
+		Ability to specify year in DonationView (up and down buttons, defaults to current year)
+		Added Donation End-of-Year report link for previous year
+		Help system checks if a translation exists and defaults to English if not
+
+		BUG FIXES
+		Cleaned up some funky syntax in DonationReports.php
+		Fixed improper donation date bounds SQL in DonationReportYearly.php
+		Strip slashes from SQL post variable in Free-Text Query form.
+
+
+2003-11-12  VERSION 1.2.5b-f
+		Removed old short tags
+		Fixed session_destroy() bug on secure servers
+		Fixed bug where quotes were mis-displayed in emails sent using phpMailer
+		Fixed bug where families were not being deleted
+
+
+2003-11-09  VERSION 1.2.5
+
+		NEW FEATURES
+		CSV Import (person and custom fields)
+		Group Assignment Helper - list people not assigned in some type of group (ex. Bible Studies)
+		Cart to Family - allows you to add cart members to an existing family or create a new one
+		Email from Cart - an email can be sent using addresses from the cart
+		Added French localization
+
+		CHANGES
+		New security option in Config.php allows a maximum failed login count to be set.  User account is disabled once this count reached.
+		Added option in Config.php to workaround installations with broken or missing gettext support.
+		GroupList now sorts by type, then name.
+		PersonView left and right custom field lists are now listed in correct ID order
+		Added an "Add to Cart" button on the Person List and Group Assignment Helper
+		Previous / Next Record Links in PersonView and FamilyView (order is based on date added)
+		Filter by Gender in Person View of SelectList
+		Filter by Group Type / Group in Person View of SelectList
+		FamilyEditor can now edit details of individual people
+		Option to delete family members when family record deleted
+		Print View for PersonList and GroupMemberList now handles filtering
+		New functions for Query results:  'Intersect Results With Cart' and 'Remove Results From Cart'
+		Automatic work-around for missing gettext support.  Removed the 'missing gettext' option in Config.php
+		Option (link toggle) to display group-specific properties in Group View (GroupMemberList.php)
+		Person List also has the new Intersect and Remove cart operation buttons
+		Batch Donation Entry now has a default date for conveniently entering donations with a non-current date.
+
+		BUG FIXES
+		For DonationEditor, set a value for GET variable Batch to avoid ambiguity over whether it is set or not
+		Page number links in SelectList did not include the filter, sort, and letter variables
+		Fixed cart functions to avoid error accessing a non-existant array (fixes Person Delete bug with empty cart)
+		Fixed weird handling of certain string characters (quotes, etc.)
+		Fixed bug with many forms where slashes would appear in form textboxes after a failed form submit
+		Security fix.  Added input filtering to a couple of overlooked files.
+		OptionManager now correctly finds duplicate field names and has much improved error handling.
+		Fixed handling of custom person field and group-specific property boolean form fields on form failure.
+		Fixed handling of Donation Envelope form field on PersonEditor form failure.
+		Person property assignments were not being deleted upon person delete.
+		Fixed locale path bug that caused gettext to not work in reports or other scripts not in the root path
+		Tried to improve label formatting for Avery types 5160,5161,5162 in class_fpdf_labels.php
+
+2003-09-30	VERSION 1.2.4
+
+		NEW FEATURES
+		Internationalization using gettext interface
+		Added Italian localization
+		Session timeout feature.  See new setting in Config.php
+		Mailing Label generation from cart contents (via CartView page)
+		Directory Report - complete directory of all persons in the database
+		Group Directory Report - directory of group members w/selectable group-specific properties
+		Old-style (pre-1.2.0) navigation sidebar is now an option.  See new setting in Config.php
+
+		CHANGES
+		Implemented complete user input validation
+		Dozens of other checks and minor changes to enhance security
+		Overhaul of UserPasswordChange.  See new related settings in Config.php
+		New setting in Config.php allows you to specify valid server ports for HTTP and HTTPS.
+		Warning on delete of a property type if there are properties using it.
+		Updated to new version of JS popup calendar code.
+		Eliminated use of lst_ID=4 for custom field type names
+		Initial Pop-Up Help
+		Various CSV Export enhancements:  Birth and Anniversary date filtering, "Individuals to Cart" output method, "export records for people in cart" option
+		Persons can no longer be deleted if they have donation records
+		Persons can no longer be deleted if they are users
+		User Listing now uses standard full-name formatting function and names have links to PersonView
+		View Donations page lists the receipt number in the table
+		Update to JpGraph 1.13
+		New vCard generation code: uses PEAR library Contact_Vcard_Build so you'll need PEAR installed and in your PHP path for this to work.
+		Removed quoted full-names from mailto link generated in CartToGroup.  Having multiple addresses is still a kludge, however.
+		Finally added Upgrade-from-* SQL scripts for the handful of people still using old pre-1.2.0 (beta) CVS snapshots.  They should import cleanly.
+		New security option in Config.php allows certain queries to be limited to those with Finance permissions
+		New security option in Config.php allows CSV Export and the new Directory Report to only be accessible by admins
+		Family Listing now displays member first names to tell apart families with the same name and address.
+		New default handling of PDF output causes browser to always prompt to save/open the file.  See Config.php
+		You must now set your InfoCentral root path in Config.php.
+		New $debug setting in Config.php allows you to turn off PHP error reporting for maximum security.
+		InfoCentral now checks if PHP's register_globals setting is turned on and refuses to work if so.
+
+		BUG FIXES
+		All known security holes fixed. (protection from malicious users only, login itself was still secure)
+		PropertyTypeList should show delete links all for property types, regardless of properties using them.
+		Eliminated a few remaining 'short open tags' in case people have PHP's short_open_tags turned off.
+		Fixed a bug that caused SQL error when someone is added and removed from the cart and then a cart-to-group operation is performed.
+		Fixed a similar SQL error with cart-to-group when adding a new group.
+		Fixed a couple SQL syntax errors in the Upgrade-from-1.1.x.sql script.  I'm surprised nobody pointed these out before.
+		Fixed non-printing of "BirthDate" in header of CSV Export if no "from" date range entered.
+		Typo in OptionManagerRowOps caused up/down re-ordering to break in Classifications, Roles, etc. editors
+		Fixed an SQL bug with CVS Export that caused improper last/family name sorting in some unusual cases.
+		Fixed improper Redirect() behavior due to lack of reliable root path variable
+
+2003-07-05	VERSION 1.2.3 RELEASED
+
+		CHANGES
+		Beginnings of a user input validation system for security purposes
+
+		BUG FIXES
+		Fixed major security issue in SelectList that allowed privilege escalation via SQL insertion.
+		Fixed obvious typo bug in SelectDelete.php
+		Fixed duplicate function name in QuerySQL.php, which caused error on load
+		Fixed PersonEditor bugs resulting from careless mistake while adding 'State' textbox
+
+
+2003-06-30	VERSION 1.2.2 RELEASED
+
+		BUG FIXES
+		Fixed syntax errors in Upgrade-from-1.1.x.sql
+		Changed column name in Upgrade-Helper.php to avoid old-CVS conflicts
+		Redirect() function now determines whether using HTTPS, based upon the port number != 80.
+
+
+2003-06-25	VERSION 1.2.1 RELEASED
+
+		CHANGES
+		Added a Redirect() function that creates absolute URL from relative one and calls header()
+		Added a RunQuery() function to standardize all mysql_query usage and error handling.
+		New CartToGroup function allows selection of group role after a group is selected.
+		Group Specific Properties and Custom Person field editors now check for duplicate names.
+		When a non-US country is selected, a 'State' textbox value is stored instead of the drop-down
+
+		BUG FIXES
+		Some property handling code had not been updated for the new r2p table schema.
+		Bug in OptionManager.php caused error when Group Roles changes saved.
+		Default password from Config.php needed convert to lowercase before use in UserReset/UserEditor
+
+
+2003-06-12	VERSION 1.2.0 RELEASED
+
+		CHANGES
+		There have been too many changes to list here.  The vast
+		majority of the code has been re-written or re-tooled since
+		1.1.2.  Many aspects of the interface have been greatly enhanced.
+
+		BUG FIXES
+		Again, far too many to list here.
+		*NOTICE* There have been many security holes fixed.  All older versions
+		should be considered unsafe for untrusted networks and/or users.
+
+		NEW FEATURES
+		Group-Specific Properties
+		Basic Donations Tracking and Reports
+		Custom Person Fields
+		Editable Selection Lists
+		Enhanced List Views with pagination, sorting, and filtering
+		Database Backup Utility
+
+
+
+2002-05-20	VERSION 1.1.2 RELEASED
+
+		CHANGES
+		*.php every line of code has been gone over and many small edits have been made
+		FamilyView.php, PersonView.php photos can now be deleted from the browser
+		HelpNotes.php updated some information
+
+		BUG FIXES
+		CSVCreateFile.php fixed join error that was not selecting all records
+		Help*.php added config line to fix mysql errors
+		PersonDelete.php will delete user record also if person is a user
+		PersonView.php added per_FirstName to order by clause on line 73
+		UserEditor.php added </form> tag on line 246, fixed query error on line 31
+
+		NEW FEATURES
+		CSV Exports - is now open and ready for business
+		/Include/Header.php added link to CSVExport under Reports menu near line 103
+		CSVExport.php renamed to CSVCreateFile.php and highly modified
+		CSVExport.php now contains a form for creating custom CSV exports and CSVCreateFile does
+		the mysql queries and create the output file
+		GroupView.php removed link to CSVExport.php on line 240
+
+		Photos - photos can now be uploaded from the browser for any person or family record
+		if the database user has the EditRecords permission.
+
+
+2002-04-15	VERSION 1.1.1 RELEASED
+
+		CHANGES
+		/SQL/Upgrade_1.1.sql typo fixed
+		FamilyView.php, PersonView.php MapQuest links now open in new window
+		FamilyView.php fixed HTML formatting on line 134, 136
+		PersonView.php fixed HTML formatting on line 247, 249
+
+		BUG FIXES
+		/Include/Header.php corrected link to SQL/Backup.sql file
+		/SQL/Install.sql modified INSERT to fix error introduced with the Notes permission, line 292
+		UserEditor.php fixed SQL error (introduced with the Notes permission) on line 35 and 76
+
+		NEW FEATURES
+		Installation Directory - settings have been altered so that InfoCentral can be installed
+		anywhere on a server.
+		/Help directory removed, all help files are now prefixed with "Help"
+		/Include/Header.php removed absolute paths so that InfoCentral can be installed in any directory
+
+		CSV Exports - not yet completed
+		CSVExport.php fixed many small issues
+		CSVGroupMembers.php was merged into CSVExport.php and deleated
+		GroupView.php updated link to CSVExport.php on line 240, users with Manage Groups permission can use only
+
+
+2002-03-03	VERSION 1.1 RELEASED
+
+		CHANGES
+		added copyright to each file header
+		/Docs directory added to store documentation
+		/Docs/Readme.txt updated with new path to Install.sql
+		/Include/gpl.txt updated with newest version and moved to /Docs/GPL.txt
+		/SQL/InfoCentral.sql renamed to Install.sql
+		.htaccess file added to make Default.php load as index (for apache users)
+
+		BUG FIXES
+		/Images/spacer.gif renamed to Spacer.gif
+		/SQL/Install.sql, fixed table name in line 199
+		CSVExport.php modified near line 92, changed path
+		CSVGroupMembers.php modified near line 47, changed path
+		FamilyRoleManager.php modified near line 195, changed incorrect links
+		FamilyView.php modified near line 186, fixed age calculation error
+		PersonView.php modified near line 396, changed incorrect link
+
+		Permission Bugs - Some users could modify data without permission, changes have
+		been made in these files to fix it
+		/Include/Header.php, any user could export cart to group
+		CartView.php, any user could export cart to group
+		FamilyView.php, any user could modify properties/classification
+		GroupList.php, any user could add a new group
+		PersonView.php, any user could remove someone from a group/modify properties
+
+		NEW FEATURES
+		Notes Permission - option was added for notes as these often contain sensitive
+		information.
+		/SQL/Install.sql usr_Notes field added to user_usr table
+		Default.php, added notes option
+		FamilyView.php, must have Notes permission to view, add or edit notes
+		PersonView.php, must have Notes permission to view, add or edit notes
+		UserEditor.php, added notes option
+
+		Database Backup - if you are using a utility such as mysqldump to backup the
+		database, this checks for a file called Backup.sql in the /SQL folder.
+		/Include/Header.php, has new menu option for "Download Backup" under reports
+
+		Maps - when viewing a person or family, there is a link to the mapquest map for
+		that record.
+		FamilyView.php, modified near line 88
+		PersonView.php, modified near line 133
+
+		Photos - photos can now be added to each family or person record, files
+		currently have to be uploaded via FTP with their ID.jpg. Would be nice to have
+		a way to do this from the screen right now.
+		/Images/Family directory added to store photos
+		/Images/Person directory added to store photos
+		FamilyView.php, table has been added with a cell for photo
+		PersonView.php, table has been added with a cell for photo

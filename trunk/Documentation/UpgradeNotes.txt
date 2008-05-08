@@ -1,0 +1,36 @@
+Upgrade Notes for Infocentral
+-----------------------------
+
+** Releases since 1.2.0 (Ex. 1.2.5) **
+
+There are no changes to the SQL database schema in minor releases.  You do NOT need to run any scripts in the SQL/ directory UNLESS you are using a pre-1.2.0 version (such as a Beta or 1.1.x version).  In that case, please see the section below.
+
+You DO need to transfer settings from your old Config.php to the new one that comes with this release.  You CANNOT just copy you old Config.php overwriting the new one because there are most likely configuration settings in the new version.  You need to go through and see if any of these new setting apply to your installation and make changes as appropriate.
+
+There are also report-related settings in Include/Report-Config.php.  You should follow the same procedure as with Config.php.
+
+
+** Release 1.2.0 **
+
+WARNING:  Please back up your existing MySQL database before attempting to upgrade InfoCentral!  If anything goes wrong or you make a silly mistake, you don't want to lose all your data!!
+
+The general process of upgrading is as follows:
+1.) Rename or move your old infocentral directory.
+2.) Extract the downloaded .tar.gz as if installing from scratch.
+3.) Edit the new Include/Config.php file to configure InfoCentral for your installation.
+4.) Copy any JPEG image files from Images/Person and Images/Family of the old directory to the new one.
+5.) Update the database schema using the SQL/Upgrade-from-1.1.x.sql script.  See below.
+6.) Login as an Admin-privileged user.
+7.) Run the PHP script SQL/Upgrade-Helper.php to see if any other database changes are necessary.
+
+Notes:
+
+- You may need to change the default TrueType font path for the included JPGraph library used for the daily donation report.  To do this, you must edit line 38 of the file Include/jpgraph-1.13/src/jpgraph.php.  If you have JPGraph and FPDF elsewhere on your server, you can specify where in Config.php
+
+- Users of the last official release (1.1.2) should be able to just run the MySQL updates in Upgrade-from-1.1.x.sql unchanged.
+
+- Those who had been using old CVS snapshot BETA (pre-1.2.0) versions will need to apply database updates from the appropriate Upgrade-from-beta-DATE.sql file.  DATE is the date in the filename of the archive you originally downloaded InfoCentral CVS snapshot from.  For example "20030227" was the most recent CVS snapshot released before the official 1.2.0 release.
+
+NOTE: You may find it easiest to dump your existing query-related tables and re-import from Install.sql rather than trying to figure out which changes you need.  Some query-related INSERT's from Upgrade-from-1.1.x.sql have been updated since you possibly last used them, so it is easier to remove and re-insert rather than come up with your own UPDATE's to patch in the changes.
+
+- Some changes to the database were not possible to include in the Upgrade-from-1.1.x.sql script because they are programmatic.  To make these changes, you need to use the SQL/Upgrade-Helper.php script once logged in as an Admin user.  (Step 7 above)
