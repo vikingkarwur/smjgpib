@@ -1,0 +1,184 @@
+These are general development notes for the next major version.  Some features may not be completed in time for the next release.  Interested?  Get coding! (:  All generally working code submitted will be quickly massaged and then merged into the CVS tree.
+
+/==========================================\
+=                      KEY                 =
+=  ======================================  =
+=    *   = completed                       =
+=    /   = partially implemented           =
+=    X   = discarded / no longer relevant  =
+=  (-R-) = Next Release Critical           =
+=                                          =
+\==========================================/
+
+Recent Bugs, Inconsistencies, and Silly Nuances:
+------------------------------------------------
+* Because of group-member-select field type in Group-Specific Properties, it would be good to do referential checking when removing someone from a group.
+* If you change a family's name, it's members' last names do not get updated, as they are stored seperatedly.
+* With use of header("Location: URL"), URL needs to be absolute as per HTTP/1.1 spec.  Perhaps create a redirect('RelativeURL') function.
+- Database Concurrency Issue: need to check if an envelope is still available before assigning it in PersonEditor.php
+- Don't restrict money fields to 10.2 decimal in MySQL (such as GSP money type).  Script needs to conform this to the language used.
+
+     =========
+     = Ideas =
+     =========
+
+Latest Idea Number: 83
+-------------------
+
+Email:
+------
+07 - A great use for the cart would be to make a calling or email list.  For phone, use a modem to autodial numbers.  Once dialed, it automatically lets you take phone notes and stamps the note with the current date and time at the beginning and end of the call.  These notes can be private to the person or to a user group.  Have an "end call" button that disconnects, saves the notes (if any), and moves on to the next in the list.
+28 - Email features that produce mailto links for easy mailings to groups, query selections, cart contents, etc.
+60 - Email validator function that checks syntax, then looks up the domain to see if it exists.  Perhaps it would also make sense at some point to store which emails (and even regular addresses and phones) are validated.  This could be a flag or even a value such as where 0 = syntax-invalid address, 1 = invalid, syntax-correct address, 2 = unvalidated, syntax-correct address, 3 = fully validated address, 4 = changed address, needs updated.
+64 - Web Contacts management.  Many organizations need the ability to store only emails for mailing lists or other purposes.  This would typically be information gained from a public web site.  Ordinary person records require First and Last name and are unsuitable for this.
+
+Labels:
+-------
+29 - Re-implement the PDF label-generator that Deane had started on (PDFLabels.php), but using FPDF this time.  The idea is we want to be able to generate mailing labels for either 1.) people in a group or 2.) people in the cart.  Eventually, we can have it automatically format to perfectly fit standard label sheet types (ie. Avery 12345 or whatever).
+
+CSV:
+----
+36 - CSV Export should have presets for such export uses such as "mailing labels" (ie. turn off some extra fields, set family roll up, etc.)
+40 - CSV Export - add birthday and anniversary limits to the exporter, for perhaps "birthdays this month" list
+43 - Ability to do searches / CSV exports on group-specific property or custom person field values
+47 - CSV Export - selectable group role after selecting a group (JS), but only if single group selected
+48 - CSV Export - filtering on group-specific properties
+61 - Ability to save CSV export settings for future use. (Javascript + RPC + new table)
+66 - Overhaul CSV export and reports system to modularize and build a standard interface for all Data Export and Report Generator features.  All data should be usable for both CSV and reports generation (including group-specific properties, donation info, etc.)
+82 - Allow CSV to not require Last Name
+
+Importing:
+----------
+42 - CSV Import utility - useful for people switching to InfoCentral.  Lots of complexity with data validation though - needs to handle this gracefully, such as after first input attempt, show all records that failed due to checks and let the user manually edit data in those fields.
+72 - vCard Import - Allow individual records to be imorted from standard vCards
+
+Relationship Manager:
+---------------------
+53 - Relationship manager (between persons), for example: friend, spouse, child, business partner, etc.  This may answer the problem of using proper husband/wife names on family roll-up addresses.  Relationship types could have groups like "familial", "professional", "other"
+56 - Family records are pretty much only used by churches.  They probably need to be replaced by a more flexible system of storing relationships between members, such as Idea 53.  It is also possible that the family record system could simply be a module that the administrator could turn off.
+58 - Figure out a standard method for storing information about organizations (churches, businesses, etc.).  This could be a separate table similar to person_per, a hard-coded group type, a flag in person_per, some functionality of the Relationship Manager (Idea 53).
+
+Donations:
+----------
+41 - Some method of rapidly entering existing envelope numbers?
+45 - Do donation funds need a 'tax deductable' flag?
+54 - Donations functionality needs pledges, campaigns, solicitations
+70 - Need the ability to edit the donation payment types
+
+Phone/Address:
+--------------
+35 - Alternative address feature. (ie. use this address instead, from StartDate to EndDate).  This would be a seperate table referenced by person_ID.
+46 - Some method of making phone numbers "unlisted".  It seems as though we may need a more sophisticated phone number format and parsing routine.  Perhaps for starters, add a U at the beginning of the database field.
+52 - Perhaps we should use seperate tables for storing addresses and phone numbers.  Then, people can have multiple addresses assigned (home,work,school,p.o.box,etc) and we can also implement address as a custom field type.  A phone table would probably be better than the funky string parser too.  It could have columns for the type, country, various flags (unlisted, do not call, etc.), extension, a short note, etc.
+63 - Email and Mailing Addresses need broken off into seperate tables so that persons and families can have as many assigned as necessary.
+
+Groups:
+-------
+26 - View Group Members (MemberList.php) should have links on header row to sort by other things than role.
+33 - It might be useful to store the date on which a person was added to a group.
+38 - Family assignment to groups (ex. a "missionaries group" that both includes families and individuals not assigned to families)  GroupMemberList should be able to display families alongside persons.  FamilyView will need an "Assigned Groups" listing like that of PersonView.
+59 - Group Listing needs sort-by column title links (name, type, # members)
+71 - Multiple roles for group members
+75 - Some sort of editable standard group roles for certain group types.  For example, we might want to force all "Bible study small group" group types to have a "leader" and "co-leader" role so that later we can automatically email all "Bible study" small group leaders.  Otherwise, each group would have their own role designators.
+
+Family:
+-------
+01 - There should be an option to (manually) inherit family-record address and home phone, etc. from a new person added to the family.. (such as a widow with kids moves to a new husband's home).  But this should not include email address, cell phone, work phone because these may be specific to individual members.  This operation should be confirmed.
+02 - Vice-versa, there should also be an option to re-inherit home address / phone from assigned family (such as a child is home from school and living at home again).  This really just means NULLing these fields on person record.
+50 - Need a rapid person-entry form like the one when adding a new family.
+78 - Allow for classification to be selected when a new family is created
+
+Person:
+-------
+23 - Person Listing needs more sort/display options (esp. display "Last, Title First Middle, Suffix" style), perhaps the ability to set the defaults in Config
+24 - PrintMember is somewhat redundant code.  Instead, add a variable for PersonList that causes it to display the same thing.
+57 - May need another table to store module-specific fields for persons. (donation envelope, organization donation matching percent, is donor, family record ID, etc.)  This table would be dynamic such that enabling a module would add the required fields.
+65 - Password strength tester / dictionary lookup (optional)
+69 - Perhaps there should be an option to deactivate rather than delete certain records.  For example, a user might want to remove a person from the database, but keep their record so as to not lose old donation records, person from group selects, etc.  This is also important for classifications like "deceased" or "former member".  There are numerous ways this could be implemented.
+77 - Add a database column for "Preferred Name"
+
+Admin:
+------
+18 - There should be an Admin-only interface for creating and editing reports.
+49 - How about an inactivity login timeout based on a session variable, 'lastOperation' or something..
+74 - Assigned usernames - Instead of a drop-down menu at login, assign users a username (or allow them to select one) and have a text field for username. This would be an option between drop-down and textfield.
+81 - There should be an Admin interface that lets variables currently stored in files (such as config.php) to be edited via a webpage
+83 - Restore from backup feature
+
+Privacy:
+--------
+/3 - Not everyone should be allowed to make private notes.  Also, Administrators should be able to see all notes, private or not.
+08 - InfoCentral-User Groups with editable privileges.  (For example, a "counselors" group may have access to certain notes marked with this groups' permissions)
+51 - Eventually, certain things need to be "hidable" so that only certain users can see them (such as perhaps confidential group membership, etc.)  This will ultimately be part of a complete user-group-other permissions system.
+
+Interface:
+----------
+/16 - It may be confusing to some users that after making a change on a long page (such as PersonView.php, adding a property) the page reloads to the top.  = Solution is RPC's using Javascript, hidden iframe, etc. (update of page contents without a reload)
+37 - States drop down should change to provinces if Canada is selected.  Change to text input box if neither US or Canada.  Eventually, this should be a flexible system where state/provinces are stored in a table.
+/39 - Pop-up hints (able to be disabled of course!)
+55 - Implement a stylesheet template system to eliminate need for Style-*.css and to enable users to define custom colors and fonts / sizes.
+62 - Interests feature: persons can be assigned to interest topics and/or subtopics.  For example, a topic of "Bible Research" or more specific subtopics like "Book of Revelations" or "Greek Language Study".  Then you could do queries based on people with general topical interests or otherwise certain subtopic interests. The interest list could actually be a tree with unlimited depth.  For example, Bible -> Bible Study -> Bible Research -> Greek Language -> Beginner's Greek Studies
+67 - Need a more flexible date handler that will accept partial information.  Some users may have data containing only a month-day or only a year.  An implementation like the Birthday field is possible, but kinda clumsy and it's not acceptible to use multiple columns for a single date.  (incidentally, this should also be re-written once a standardized method is chosen)
+68 - Need a month field type for custom properties
+73 - Next record button - Allow a user in person/family view to move to the next/previous record simply by clicking a next/previous link.
+20 - Friendly installer/upgrade script..
+44 - 'Organization' records - for businesses, other churches and ministries, etc.
+76 - The cart view should be paginated for large numbers of persons
+78 - A button in the query-results page that says something like "Remove From Cart any Items that Aren't in this Results List". That would make AND-ing queries together as simple as OR-ing them is now, and would be very useful for me (and I expect other people too).
+79 - Another useful button to have (but not quite as important) would be "Remove From Cart any Items that Are in this Results List".
+80 - Hide some standard fields. Allow to be set in the Admin interface
+
+     ==========================
+     = Major Features Needed: =
+     ==========================
+
+F1 - InfoCentral needs comprehensive user/group access control lists for the entire database.  See for example, Idea 8.  Currently, security is very basic.
+F3 - Event scheduling / registration / attendance
+F4 - Resource and Room scheduling integrated with F3
+F6 - Complete accounting with accounts, funds, etc. (these seem redundant with gnucash or Nola.. hmm.. possible to integrate?  what do churches currently use?)
+F7 - Install / Upgrade script for newbies
+F9 - XML layer for accessing the database
+
+     ===============================
+     = Long Term Development Plans =
+     ===============================
+
+- Complete InfoCentral overhaul.  Need to seperate interface and logic code as much as possible, abstract certain functionality, modularize, write classes, etc.  This will make future development much easier once complete.
+- ADOdb. No longer make InfoCentral tied to mySQL, allowing organizations to utilize the database they are familiar with/ already have implemented.
+- The XML layer would go between the interface and database engine (MySQL or abstracted).  Once complete, other applications would be able to talk to the database -- such as a scaled down InfoCentral interface for handheld devices or perhaps a non-web application written in Qt.  It would look something like this:
+	Interface <-> XML data <-> network <-> XML Layer on Server <-> Database logic <-> Database Engine
+Right now, it looks like this:
+	Interface <-> HTML <-> network <-> PHP <-> MySQL
+
+     =============
+     = Completed =
+     =============
+
+Ideas:
+------
+*4 - When creating a new family and adding members, the member name fields should be for (and be labeled) First, Middle, Last.  Currently, there is only (unlabeled) Firstname and Lastname.
+*5 - If a new person gets assigned to a family, the family name should become their last name if not entered otherwise.
+*6 - Phone numbers should have extension field or intelligently parse "###-###-### e[xt][.] ######"
+*9 - Display of the middle initial (if middle name/initial entered) would be nice.
+*10 - Display of a person's "Assigned Properties:" should be organized by property type.. (ex. General, Personal, Favorites, etc.)
+*11 - Currently, a family record cannot be deleted until members are gone.  Instead, it could set members' family to NULL.
+*12 - GroupEditor.php and RoleManager.php should be combined and redesigned for easier group editing / creation
+*13 - Phone numbers should be parsed differently depending on the country.  For starters, lets disable phone number parsing if not US!
+*14 - As part of the security overhaul, all use of registered globals needs to be eliminated using Superglobals.  Ex. $_SERVER['DOCUMENT_ROOT'] instead of $DOCUMENT_ROOT   Ex.) $_SESSION[variable] instead of session_register(variable)  This change will also give InfoCentral the dependancy of PHP versions greater than 4.0.6
+*15 - A property's type should be displayed somewhere.  Otherwise it's kinda useless to categorize them!
+*17 - Re-evaluate use of AgeGroups vs. just storing birthdate.  Also, it is necessary to re-calculate ages whenever the data is going to be used *OR* use some sort of nightly maintenance routine to do this all at once!
+*19 - When creating a new family, there should be the option of entering birthdates instead of selecting an age group.
+*21 - Custom person fields:  Churches may have different needs of what needs stored for EVERY member.  This will eliminate the need for "special requests" for certain fields to be added / removed.  Person Properties, while flexible, are too clumsy for this as they are better suited for assignment to only specific individuals.
+*22 - Optional display of group specific properties on the personview page
+*25 - Need "select role" for Cart to Group.  This will require use of Javascript and an IFRAME to dynamically update based on group currently selected.
+*27 - Non-default group members list in GroupView gets too long with large groups.  Need to use an IFRAME with scrollbar if there are many records.
+*30 - Re-design PersonList.php to also do families.  FamilyList.php is outdated junk.  This will also eliminate the need for SelectList.php
+*31 - Some means of dealing with contribution "envelope numbers" that many churches use to facilitate rapid entry.  There should also be some type of rapid entry form for doing hundreds (thousands?) of new donations in one sitting.
+*32 - Custom properties/fields types should include a "pre-defined list" type.. ie.) a drop-down box of pre-defined values
+*34 - Order field for custom person properties (determines order in the PersonEditor)
+
+Major Features:
+---------------
+* F2 - Groups need the ability to create special properties used for their members only
+* F5 - Donations tracking
+* F8 - Backup routine

@@ -1,0 +1,137 @@
+<?php
+/*******************************************************************************
+ *
+ *  filename    : statistik.php
+ *  last change : 2004-09-16
+ *  description : statistik keseluruhan
+ *
+ *  http://smj.gpib.org/
+ *  Copyright 2004 Litbang GPIB
+ *
+ *  smjGPIB is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation.
+ *
+ ******************************************************************************/
+ 
+// Include the function library
+//require "Include/Config.php";
+//require "Include/Functions.php";
+
+//$sSERVERNAME = "localhost";
+//$sUSER = "bukitsion";
+//$sPASSWORD = "bukitsion1234";
+//$sDATABASE = "smjgpib";
+
+$sSERVERNAME = "localhost";
+$sUSER = "petrabgr";
+$sPASSWORD = "petrabgr";
+$sDATABASE = "petra-bogor";
+
+$sSQL = "SELECT DISTINCT c8 from person_custom ORDER BY c8 ASC";
+$sGoldarah1 = RunQuery($sSQL);
+
+$var="\"$_REQUEST[gd]\"";
+
+$sSQL = "SELECT * from person_per 
+         LEFT JOIN person_custom ON person_per.per_ID = person_custom.per_ID
+		 LEFT JOIN family_fam ON person_per.per_fam_ID = family_fam.fam_ID
+         WHERE c8=$var AND DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 17 YEAR) <= CURDATE() AND DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 55 YEAR) > CURDATE() ORDER BY fam_NamaSek ASC, per_FirstName ASC";
+$sGoldarah = RunQuery($sSQL);
+//$Goldarah = mysql_num_rows($sGoldarah);
+
+$sSQL = "SELECT * from person_per LEFT JOIN person_custom ON person_per.per_ID = person_custom.per_ID where DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 35 YEAR) > CURDATE() AND c16=1 AND per_fmr_ID<>0";
+//$sSQL = "SELECT * where DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 18 YEAR) <= CURDATE() AND DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 35 YEAR) > CURDATE()";
+//$sSQL = "SELECT per_ID, per_BirthDay, per_BirthMonth, per_BirthYear from person_per where DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 18 YEAR) <= CURDATE() AND DATE_ADD(CONCAT(per_BirthYear,'-',per_BirthMonth,'-',per_BirthDay),INTERVAL 35 YEAR) > CURDATE()";
+$sUsia = RunQuery($sSQL);
+//$GP = mysql_num_rows($sGP);
+
+?>
+
+<center>
+  <table width="760" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="760" align="center" valign="top"> 
+        <table width="99%" border="0" cellspacing="1" cellpadding="1">
+          <tr align="center" bgcolor="#CCCCCC"> 
+            <td colspan="8"><strong>Daftar Nama GOLONGAN DARAH</strong> : <? echo "<b>$_REQUEST[gd]</b>";?> 
+              (usia donor 17 s/d 55 tahun) * <font color="#FF0000">merah</font> 
+              = no contact persoon (Kepala Keluarga)</td>
+          </tr>
+          <tr align="center"> 
+            <td width="3%" bgcolor="#9797FF">No</td>
+            <td width="4%" bgcolor="#9797FF">Sek</td>
+            <td width="21%" bgcolor="#9797FF">N a m a</td>
+            <td width="4%" bgcolor="#9797FF">Usia</td>
+            <td width="35%" bgcolor="#9797FF">Alamat</td>
+            <td bgcolor="#9797FF">Telp RMH</td>
+            <td bgcolor="#9797FF">Telp Kantor</td>
+            <td bgcolor="#9797FF">HP</td>
+          </tr>
+          <?
+  $tahunini=DATE(Y);
+  $no=1;
+  $n=1;
+  while ($Goldarah=mysql_fetch_array($sGoldarah)) {
+       if ($n==1) {
+	     //$bg="#BBCCFF";
+		 $bg="#BBCCFF";
+		 } else {
+	     $bg = "#E6F0FF";
+		 } 
+  ?>
+          <tr onMouseOver="bgColor='#FFFFCC'" onMouseOut="bgColor='<? echo($bg); ?>'" > 
+            <td height="19" align="center" bgcolor="<? echo($bg); ?>"><? echo "$no.";?></td>
+            <td align="center" bgcolor="<? echo($bg); ?>"><? echo "$Goldarah[fam_NamaSek]";?></td>
+            <td align="left" bgcolor="<? echo($bg); ?>">&nbsp;<? echo "<a href='./PersonView.php?PersonID=$Goldarah[per_ID]'>$Goldarah[per_FirstName] $Goldarah[per_MiddleName] $Goldarah[per_LastName]</a>";?></td>
+            <td align="center" bgcolor="<? echo($bg); ?>"><? echo $tahunini-$Goldarah[per_BirthYear] ;?></td>
+            <td bgcolor="<? echo($bg); ?>">&nbsp;<? echo "$Goldarah[fam_Address1] $Goldarah[fam_Kompleks1] $Goldarah[fam_Kelurahan1] $Goldarah[fam_City]";?></td>
+            <td width="11%" align="center" bgcolor="<? echo($bg); ?>">&nbsp; 
+              <? 
+	 //homephone
+	   if ($Goldarah[fam_HomePhone]!='') {
+	      echo"&nbsp;$Goldarah[fam_HomePhone]";
+		  }
+		   ?>
+            </td>
+            <td width="11%" align="center" bgcolor="<? echo($bg); ?>"> 
+              <?
+	//worphone
+	   if ($Goldarah[per_WorkPhone]=='' AND $Goldarah[per_fmr_ID]!=1 AND $Goldarah[per_fmr_ID]!=0) { 
+		  echo"&nbsp;<font color=red>$Goldarah[fam_WorkPhone]</font>";
+		  } else {
+		  if ($Goldarah[per_WorkPhone]=='') {
+		      echo"&nbsp;$Goldarah[fam_WorkPhone]";
+		     }
+		  }
+	    if ($Goldarah[per_WorkPhone]!='') { 
+		  echo"&nbsp;$Goldarah[per_WorkPhone]";
+          } ?>
+            </td>
+            <td width="11%" align="center" bgcolor="<? echo($bg); ?>"> 
+              <?
+	//cellphone  
+	   if ($Goldarah[per_CellPhone]=='' AND $Goldarah[per_fmr_ID]!=1 AND $Goldarah[per_fmr_ID]!=0) { 
+		  echo"&nbsp;<font color=red>$Goldarah[fam_CellPhone]</font>";
+		  } else {
+		  if ($Goldarah[per_CellPhone]=='') {
+		      echo"&nbsp;$Goldarah[fam_CellPhone]";
+		     }
+		  }
+	    if ($Goldarah[per_CellPhone]!='') { 
+		  echo"&nbsp;$Goldarah[per_CellPhone]";
+          } ?>
+            </td>
+          </tr>
+          <? 
+  $no++;
+  $n++;
+  if ($n>2) {
+      $n=1; 
+	 }
+  }?>
+        </table>
+      </td>
+    </tr>
+  </table>
+</center>
