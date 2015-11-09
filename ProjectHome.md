@@ -1,0 +1,1 @@
+Program database untuk warga jemaat di masing-masing Jemaat GPIB
